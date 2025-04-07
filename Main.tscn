@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsugx76rhg7um"]
+
+[ext_resource type="Script" uid="uid://eqaocw7qdya2" path="res://CameraController.gd" id="1_glv2v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_glv2v")
+metadata/Sensitivity = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.16427)
+mesh = SubResource("BoxMesh_glv2v")
