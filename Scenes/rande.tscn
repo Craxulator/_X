@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ct2v0mbx75w4m"]
 
-[ext_resource type="Script" path="res://RandeBody3D.gd" id="1_8c48r"]
+[ext_resource type="Script" uid="uid://bq00525xnaubl" path="res://Scripts/RandeBody3D.gd" id="1_8c48r"]
 
 [node name="RANDE" type="Node3D"]
 

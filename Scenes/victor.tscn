@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://df1rownf6oiwc"]
 
-[ext_resource type="Script" path="res://VictorBody3D.gd" id="1_7i0lf"]
+[ext_resource type="Script" uid="uid://b1hg6uigmhaut" path="res://Scripts/VictorBody3D.gd" id="1_7i0lf"]
 
 [node name="victor" type="Node3D"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://tkrvkpn6lq4i"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_jklrk"]
+[ext_resource type="Script" uid="uid://det6vakc8p1gp" path="res://Scripts/Controllers/EnemyController.gd" id="1_jklrk"]
 
 [node name="Enemy" type="Node3D"]
 

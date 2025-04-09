@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxm0jtkgjdpj2"]
+
+[ext_resource type="Script" uid="uid://eqaocw7qdya2" path="res://Scripts/Controllers/CameraController.gd" id="1_rpqav"]
+
+[node name="Player" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_rpqav")
+metadata/Sensitivity = 5.0
