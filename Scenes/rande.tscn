@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://ct2v0mbx75w4m"]
+[gd_scene load_steps=4 format=3 uid="uid://ct2v0mbx75w4m"]
 
 [ext_resource type="Script" uid="uid://bq00525xnaubl" path="res://Scripts/RandeBody3D.gd" id="1_8c48r"]
 
-[node name="RANDE" type="Node3D"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0wxlb"]
 
-[node name="RandeBody3D" type="CharacterBody3D" parent="."]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dg8e4"]
+
+[node name="Rande" type="CharacterBody3D"]
 script = ExtResource("1_8c48r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_0wxlb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_dg8e4")
+debug_color = Color(0.302735, 0.584585, 0.635448, 0.42)

@@ -1,4 +1,4 @@
-extends "res://enemy.gd"
+extends "res://Scripts/Controllers/EnemyController.gd"
 
 @export var projectile_scene : PackedScene
 @export var projectile_speed = 10.0
