@@ -23,10 +23,12 @@ func _process(DeltaTime):
 	var VIEWPORT = get_viewport()
 	var MOUSE_POSITION = VIEWPORT.get_mouse_position()
 	var MOUSE_POSITION_CENTERED = Vector2(MOUSE_POSITION.x - VIEWPORT.size.x / 2, MOUSE_POSITION.y - VIEWPORT.size.y / 2)
-	var MOUSE_ROTATION_VECTOR = Vector3(-MOUSE_POSITION_CENTERED.y, -MOUSE_POSITION_CENTERED.x, 0)
+	var MOUSE_ROTATION_VECTOR = Vector3(-MOUSE_POSITION_CENTERED.y, -MOUSE_POSITION_CENTERED.x, 0) * DeltaTime * get_meta("Sensitivity")
 	
 	if get_window().has_focus(): 
-		rotation_degrees += MOUSE_ROTATION_VECTOR * DeltaTime * get_meta("Sensitivity")
+		rotation_degrees.x += MOUSE_ROTATION_VECTOR.x
+		rotation_degrees.x = clamp(rotation_degrees.x, -90, 90)
+		get_parent_node_3d().rotation_degrees.y += MOUSE_ROTATION_VECTOR.y
 		Input.warp_mouse(get_viewport().size / 2)
 	pass
 
