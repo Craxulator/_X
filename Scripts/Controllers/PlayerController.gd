@@ -11,11 +11,15 @@ func HandleGravity(DeltaTime):
 	pass
 	
 func HandleJump():
-	if Input.is_action_pressed("Jump") and is_on_floor(): velocity.y = Player.get_meta("JumpForce")
+	if not Input.is_action_pressed("Jump") or not is_on_floor(): return 
+	
+	velocity.y = Player.get_meta("JumpForce")
+	
 	pass
 	
 func HandleMovement(DeltaTime):
 	var WalkSpeed = Player.get_meta("WalkSpeed")
+	var FrictionCoefficient = 0.1
 	
 	var InputDirection = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward")
 	var MovementDirection = (transform.basis * Vector3(InputDirection.x, 0, InputDirection.y)).normalized()
@@ -24,8 +28,12 @@ func HandleMovement(DeltaTime):
 		velocity.x = MovementDirection.x * WalkSpeed
 		velocity.z = MovementDirection.z * WalkSpeed
 	else:
-		velocity.x = move_toward(velocity.x, 0, WalkSpeed)
-		velocity.z = move_toward(velocity.z, 0, WalkSpeed)
+		velocity.x -= sign(velocity.x) * FrictionCoefficient
+		velocity.z -= sign(velocity.z) * FrictionCoefficient
+		#velocity.x = move_toward(velocity.x, 0, WalkSpeed)
+		#velocity.z = move_toward(velocity.z, 0, WalkSpeed)
+		
+	print(velocity)
 	pass
 
 func _physics_process(DeltaTime):
