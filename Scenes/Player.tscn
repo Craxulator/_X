@@ -11,8 +11,9 @@ size = Vector3(1, 2, 0.5)
 
 [node name="Player" type="Node3D"]
 metadata/Gravity = 9.806
-metadata/JumpForce = 3.131
-metadata/WalkSpeed = 1.0
+metadata/JumpForce = 4.903
+metadata/WalkSpeed = 3.142
+metadata/Paused = false
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 script = ExtResource("1_kyqiw")

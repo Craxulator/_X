@@ -1,23 +1,31 @@
 extends Camera3D
 
 var Paused : bool = false
+var Player
 
 #func _init():
 	#pass
 	
 func _ready():
+	Player = get_parent().get_parent_node_3d()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pass
 	
 func Pause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	pass
+	
+func UnPause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pass
 
 func _process(DeltaTime):
 	if Input.is_action_just_pressed("Pause"): 
 		Paused = not Paused
-		if Paused: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else: Pause()
+		Player.set_meta("Paused", Paused)
+		if Paused: Pause()
+		else: UnPause()
+		
 	if Paused: return
 	
 	var VIEWPORT = get_viewport()
