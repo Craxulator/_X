@@ -7,7 +7,7 @@ var Player
 	#pass
 	
 func _ready():
-	Player = get_parent().get_parent_node_3d()
+	Player = get_parent()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pass
 	

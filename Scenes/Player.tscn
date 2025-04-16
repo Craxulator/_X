@@ -3,28 +3,26 @@
 [ext_resource type="Script" uid="uid://doj88a8chemxe" path="res://Scripts/Controllers/PlayerController.gd" id="1_kyqiw"]
 [ext_resource type="Script" uid="uid://eqaocw7qdya2" path="res://Scripts/Controllers/CameraController.gd" id="1_rpqav"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rpqav"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_kyqiw"]
 size = Vector3(1, 2, 0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rpqav"]
+[sub_resource type="BoxMesh" id="BoxMesh_gntrk"]
 size = Vector3(1, 2, 0.5)
 
-[node name="Player" type="Node3D"]
-metadata/Gravity = 9.806
-metadata/JumpForce = 4.903
-metadata/WalkSpeed = 3.142
-metadata/Paused = false
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_kyqiw")
+metadata/Paused = false
+metadata/WalkSpeed = 3.142
+metadata/JumpForce = 3.142
+metadata/Gravity = 9.806
 
-[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
+[node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 script = ExtResource("1_rpqav")
 metadata/Sensitivity = 5.0
 
-[node name="Hitbox" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("BoxShape3D_rpqav")
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kyqiw")
 
-[node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("BoxMesh_rpqav")
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gntrk")
