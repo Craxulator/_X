@@ -9,7 +9,11 @@ size = Vector3(1, 2, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_gntrk"]
 size = Vector3(1, 2, 0.5)
 
+<<<<<<< HEAD
 [node name="CharacterBody3D" type="CharacterBody3D"]
+=======
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+>>>>>>> 04891631934c206187f02541d4630667264d8d11
 script = ExtResource("1_kyqiw")
 metadata/Paused = false
 metadata/WalkSpeed = 3.142
@@ -22,7 +26,14 @@ script = ExtResource("1_rpqav")
 metadata/Sensitivity = 5.0
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
+<<<<<<< HEAD
 shape = SubResource("BoxShape3D_kyqiw")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_gntrk")
+=======
+shape = SubResource("BoxShape3D_rpqav")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_rpqav")
+>>>>>>> 04891631934c206187f02541d4630667264d8d11
