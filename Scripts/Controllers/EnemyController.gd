@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var health = 100 
 @export var move_speed = 50 
 @export var attack_damage = 25 
-@export var attack_range = 3.0 
+@export var attack_range = 100.0
 @export var attack_cooldown = 1.0 
 
 #Internal Variables 
@@ -17,8 +17,8 @@ signal enemy_died
 
 func _ready():
 	target = get_tree().get_first_node_in_group("player") 
-	if target == null: 
-		print("No player found") 
+	if target:
+		print("Player found") 
 
 func _physics_process(delta):
 	if target:
@@ -52,7 +52,6 @@ func take_damage(damage):
 func die(): 
 	emit_signal("enemy_died", self) 
 	queue_free()
-
 
 """  Basic Moevement System Provided by Godot
 const SPEED = 5.0

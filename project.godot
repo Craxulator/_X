@@ -15,6 +15,10 @@ run/main_scene="uid://bsugx76rhg7um"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Assets/Images/icon.svg"
 
+[global_group]
+
+player=""
+
 [input]
 
 Pause={

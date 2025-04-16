@@ -64,3 +64,6 @@ func _physics_process(DeltaTime):
 	
 	move_and_slide()
 	pass
+
+func take_damage(): 
+	pass

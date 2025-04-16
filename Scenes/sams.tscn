@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://iovyy51jlqvl"]
+
+[ext_resource type="Script" uid="uid://deoti6tuhtrxq" path="res://Scripts/SamsBody3D.gd" id="1_ltru6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pmdx8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pmdx8"]
+
+[node name="sams" type="CharacterBody3D"]
+script = ExtResource("1_ltru6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pmdx8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_pmdx8")

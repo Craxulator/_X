@@ -8,14 +8,16 @@ extends "res://Scripts/Controllers/EnemyController.gd"
 var fire_timer = 0.0
 
 func _ready():
-	move_speed = 0.0 # Stationary
-	attack_range = 20.0 # Long range
+	attack_range = 20.0 # Long range 
+	print("Target: ", target)
 
 func _physics_process(delta):
-	fire_timer += delta
+	fire_timer += delta 
 	if fire_timer >= 1.0 / fire_rate:
 		attack()
 		fire_timer = 0.0
+		print(global_position)
+		print("Target: ", target)
 
 func attack():
 	if target:
