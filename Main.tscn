@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsugx76rhg7um"]
+[gd_scene load_steps=13 format=3 uid="uid://bsugx76rhg7um"]
 
 [ext_resource type="Shader" uid="uid://diiwf0n6p3xs1" path="res://TestShader.gdshader" id="1_uu6xs"]
 [ext_resource type="Shader" uid="uid://gljgoq5vqmxt" path="res://SkyShader.gdshader" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://iovyy51jlqvl" path="res://Scenes/sams.tscn" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://dnibpxmbjl5a8" path="res://Scenes/Player.tscn" id="4_fos0i"]
+[ext_resource type="PackedScene" uid="uid://cac6b4w8plnxf" path="res://SteelCrate.tscn" id="5_fos0i"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
 
@@ -64,3 +65,6 @@ move_speed = 1
 
 [node name="Player" parent="." instance=ExtResource("4_fos0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SteelCrate" parent="." instance=ExtResource("5_fos0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.86998, 0, -5.26668)
