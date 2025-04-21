@@ -8,7 +8,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ixxa"]
 size = Vector3(1, 2, 0.5)
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_kyqiw")
 metadata/Paused = false
 metadata/Gravity = 9.806
