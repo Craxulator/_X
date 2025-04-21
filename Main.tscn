@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://bsugx76rhg7um"]
 
-[ext_resource type="PackedScene" uid="uid://bxm0jtkgjdpj2" path="res://Scenes/Player.tscn" id="1_glv2v"]
 [ext_resource type="Shader" uid="uid://diiwf0n6p3xs1" path="res://TestShader.gdshader" id="1_uu6xs"]
 [ext_resource type="Shader" uid="uid://gljgoq5vqmxt" path="res://SkyShader.gdshader" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://iovyy51jlqvl" path="res://Scenes/sams.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://dnibpxmbjl5a8" path="res://Scenes/Player.tscn" id="4_fos0i"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
 
@@ -42,9 +42,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
 mesh = SubResource("BoxMesh_glv2v")
 surface_material_override/0 = SubResource("ShaderMaterial_r0du0")
 
-[node name="Player" parent="." instance=ExtResource("1_glv2v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000651836, 1.47358, -0.0114679)
-
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
@@ -64,3 +61,6 @@ environment = SubResource("Environment_3dxm6")
 [node name="sams" parent="." instance=ExtResource("4_cm0pq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60031, 1.03315, -2.4956)
 move_speed = 1
+
+[node name="Player" parent="." instance=ExtResource("4_fos0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
