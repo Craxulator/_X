@@ -4,6 +4,10 @@ var InputDirection
 var MovementDirection
 var PreJumpVelocity = Vector3.ZERO
 var Hitbox = null
+var StepSliding = false
+var SlideStartVelocity = Vector3.ZERO
+
+var SlideJump = false
 
 func _ready():
 	Hitbox = $Hitbox
@@ -34,7 +38,7 @@ func HandleMovement(DeltaTime):
 	if velocity.length() < 0.1: velocity = Vector3.ZERO
 	pass
 
-func HandleAirMovement(DeltaTime):
+func HandleAirMovement():
 	var WalkSpeed = get_meta("WalkSpeed")
 	var AirResistance = 0.01 * sqrt(velocity.length()) 
 	# Faster velocity means you collide with more air particles
@@ -50,16 +54,32 @@ func HandleAirMovement(DeltaTime):
 	pass
 
 func StartSlide():
-	print("StartSlide")
-	Hitbox.shape.extends.y = Hitbox.shape.extends.z
-	Hitbox.shape.extends.z = Hitbox.shape.extends.y
+	SlideStartVelocity = velocity
+	
+	StepSliding = true
+	var SavedY = Hitbox.shape.size.y
+	Hitbox.shape.size.y = Hitbox.shape.size.z
+	Hitbox.shape.size.z = SavedY
+	SavedY = null
+	
+	set_meta("Sliding", true)
 	pass
 
 func HandleSlide(DeltaTime):
+	velocity.x = MovementDirection.x * SlideStartVelocity.length()
+	velocity.z = MovementDirection.z * SlideStartVelocity.length()
 	pass
 	
 func EndSlide():
-	pass
+	StepSliding = false
+	
+	var SavedY = Hitbox.shape.size.y
+	Hitbox.shape.size.y = Hitbox.shape.size.z
+	Hitbox.shape.size.z = SavedY
+	SavedY = null
+	
+	if not SlideJump:
+		position.y += Hitbox.shape.size.y / 2.4
 
 func _physics_process(DeltaTime):
 	if get_meta("Paused"): return
@@ -72,10 +92,15 @@ func _physics_process(DeltaTime):
 	
 	if Input.is_action_just_pressed("Slide"): StartSlide()
 	
+	if Input.is_action_just_released("Slide"):
+		set_meta("Sliding", false)
+		if is_on_floor(): EndSlide()
+	
 	if is_on_floor(): 
-		HandleMovement(DeltaTime)
+		if StepSliding && not get_meta("Sliding"): EndSlide()
 		if get_meta("Sliding"): HandleSlide(DeltaTime)
-	else: HandleAirMovement(DeltaTime)
+		else: HandleMovement(DeltaTime)
+	else: if not get_meta("Sliding"): HandleAirMovement()
 	
 	move_and_slide()
 	pass
