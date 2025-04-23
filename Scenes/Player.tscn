@@ -14,6 +14,7 @@ metadata/Paused = false
 metadata/Gravity = 9.806
 metadata/WalkSpeed = 3.142
 metadata/JumpForce = 3.142
+metadata/Sliding = false
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
