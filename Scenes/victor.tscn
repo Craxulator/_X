@@ -8,6 +8,7 @@
 
 [node name="Victor" type="CharacterBody3D"]
 script = ExtResource("1_7i0lf")
+move_speed = 4
 
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)

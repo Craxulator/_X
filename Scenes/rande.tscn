@@ -8,6 +8,7 @@
 
 [node name="Rande" type="CharacterBody3D"]
 script = ExtResource("1_8c48r")
+move_speed = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_0wxlb")

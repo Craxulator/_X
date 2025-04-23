@@ -1,49 +1,47 @@
-extends "res://Scripts/Controllers/EnemyController.gd" 
+extends CharacterBody3D
 
-@export var explosion_scene : PackedScene
-@export var explosion_damage = 50
-@export var explosion_radius = 3.0
+@export var projectile_scene : PackedScene
+@export var projectile_speed = 10.0
+@export var projectile_damage = 15
+@export var fire_rate = 2.0 # Attacks per second
 
-@onready var collide = $collider
+var fire_timer = 0.0
+
+# External Variables (Property Window)
+@export var health = 100
+@export var move_speed = 50
+@export var attack_damage = 25
+@export var attack_range = 100.0
+@export var attack_cooldown = 1.0
+
+var target : CharacterBody3D # Declare target at the class level
+var attack_timer = 0
+
+#Signals
+signal health_changed(new_health)
+signal enemy_died
+
 func _ready():
-	move_speed = 8.0 # Fast movement
-	attack_range = 2.0 # Short range
-	attack_damage = 25 # High damage
+	print("Something")
+
+func _physics_process(delta):
+	target = get_tree().get_first_node_in_group("player")
+	if target:
+		move_and_attack(delta) # No need to pass target again, class-level is updated
+	else:
+		print("Player not found!")
 
 func move_and_attack(delta):
-	var direction = (target.global_position - global_position).normalized()
-	velocity = direction * move_speed
-	move_and_slide()
+	if target:
+		var direction = (target.global_transform.origin - global_transform.origin).normalized()
+		velocity = direction * move_speed
+		move_and_slide()
 
-	attack_timer += delta
-	if attack_timer >= attack_cooldown:
+		attack_timer += delta
 		if global_position.distance_to(target.global_position) <= attack_range:
-			attack()
-			attack_timer = 0.0
+			# Your attack logic here
+			pass
 
-func attack():
-	pass 
-
-func die(): 
-	explode() 
-	queue_free() 
-
-func explode(): 
-	if explosion_scene: 
-		var explosion = load("res://Scenes/explosion.tscn").instantiate() 
-		explosion.global_position = global_position 
-		get_parent().add_child(explosion) 
-		
-		#Apply damage to player if in range 
-		var bodies = explosion.get_node("Area3D").get_overlapping_bodies() 
-		for body in bodies: 
-			if body.is_in_group("player"): 
-				body.take_damage(explosion_damage) 
-		
-		# Destroy explosion
-		call_deferred("destroy_explosion", explosion)
-
-func destroy_explosion(explosion):
-	await get_tree().create_timer(0.5).timeout # 0.5 sec delay
-	if is_instance_valid(explosion):
-		explosion.queue_free()
+func die():
+	emit_signal("enemy_died", self)
+	queue_free()

@@ -1,4 +1,4 @@
-extends "res://Scripts/Controllers/EnemyController.gd"
+extends CharacterBody3D
 
 @export var projectile_scene : PackedScene
 @export var projectile_speed = 10.0
@@ -7,29 +7,41 @@ extends "res://Scripts/Controllers/EnemyController.gd"
 
 var fire_timer = 0.0
 
+# External Variables (Property Window)
+@export var health = 100
+@export var move_speed = 50
+@export var attack_damage = 25
+@export var attack_range = 100.0
+@export var attack_cooldown = 1.0
+
+var target : CharacterBody3D # Declare target at the class level
+var attack_timer = 0
+
+#Signals
+signal health_changed(new_health)
+signal enemy_died
+
 func _ready():
-	attack_range = 20.0 # Long range 
-	print("Target: ", target)
+	print("Something")
 
 func _physics_process(delta):
-	fire_timer += delta 
-	if fire_timer >= 1.0 / fire_rate:
-		attack()
-		fire_timer = 0.0
-		print(global_position)
-		print("Target: ", target)
-
-func attack():
+	target = get_tree().get_first_node_in_group("player")
 	if target:
-		var projectile = projectile_scene.instantiate()
-		projectile.global_position = global_position
-		get_parent().add_child(projectile)
+		move_and_attack(delta) # No need to pass target again, class-level is updated
+	else:
+		print("Player not found!")
 
-		# Rotate to face the target.
-		projectile.transform.basis = (target.global_position - global_position).looking_at(Vector3.UP)
+func move_and_attack(delta):
+	if target:
+		var direction = (target.global_transform.origin - global_transform.origin).normalized()
+		velocity = direction * move_speed
+		move_and_slide()
 
-		# Give the projectile velocity.
-		projectile.velocity = (target.global_position - global_position).normalized() * projectile_speed
-		projectile.damage = projectile_damage
+		attack_timer += delta
+		if global_position.distance_to(target.global_position) <= attack_range:
+			# Your attack logic here
+			pass
 
-		print("R.A.N.D.E. fired!")
+func die():
+	emit_signal("enemy_died", self)
+	queue_free()

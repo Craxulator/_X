@@ -8,6 +8,7 @@
 
 [node name="sams" type="CharacterBody3D"]
 script = ExtResource("1_ltru6")
+move_speed = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_pmdx8")
