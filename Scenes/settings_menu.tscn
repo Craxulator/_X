@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlimfn84f14f6"]
+
+[ext_resource type="Script" uid="uid://bp82vsruoixy" path="res://Scenes/settings_menu.gd" id="1_ufg0w"]
+[ext_resource type="Theme" uid="uid://bancn43rff1mv" path="res://Scenes/new_theme.tres" id="2_0cmel"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ufg0w")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 50.0
+offset_right = 987.0
+offset_bottom = 125.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Controls" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("2_0cmel")
+text = "Controls"
+
+[node name="Audio" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("2_0cmel")
+text = "Audio"
+
+[node name="Video" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("2_0cmel")
+text = "Video"
+
+[node name="Back" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("2_0cmel")
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Controls" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Audio" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Video" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Back" to="." method="_on_settings_pressed"]
