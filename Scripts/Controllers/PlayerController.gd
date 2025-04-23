@@ -3,8 +3,10 @@ extends CharacterBody3D
 var InputDirection
 var MovementDirection
 var PreJumpVelocity = Vector3.ZERO
+var Hitbox = null
 
 func _ready():
+	Hitbox = $Hitbox
 	pass
 
 func HandleGravity(DeltaTime):
@@ -47,6 +49,18 @@ func HandleAirMovement(DeltaTime):
 	
 	pass
 
+func StartSlide():
+	print("StartSlide")
+	Hitbox.shape.extends.y = Hitbox.shape.extends.z
+	Hitbox.shape.extends.z = Hitbox.shape.extends.y
+	pass
+
+func HandleSlide(DeltaTime):
+	pass
+	
+func EndSlide():
+	pass
+
 func _physics_process(DeltaTime):
 	if get_meta("Paused"): return
 	
@@ -56,7 +70,11 @@ func _physics_process(DeltaTime):
 	HandleGravity(DeltaTime)
 	HandleJump()
 	
-	if is_on_floor(): HandleMovement(DeltaTime)
+	if Input.is_action_just_pressed("Slide"): StartSlide()
+	
+	if is_on_floor(): 
+		HandleMovement(DeltaTime)
+		if get_meta("Sliding"): HandleSlide(DeltaTime)
 	else: HandleAirMovement(DeltaTime)
 	
 	move_and_slide()
