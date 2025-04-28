@@ -26,10 +26,6 @@ func _process(DeltaTime):
 		if Paused: Pause()
 		else: UnPause()
 		
-	if Input.is_action_pressed("Slide"):
-		Player.set_meta("Sliding", true)
-	else: Player.set_meta("Sliding", false)
-		
 	if Paused: return
 	
 	var VIEWPORT = get_viewport()

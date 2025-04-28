@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnibpxmbjl5a8"]
+
+[ext_resource type="Script" uid="uid://doj88a8chemxe" path="res://Scripts/Controllers/PlayerController.gd" id="1_kyqiw"]
+[ext_resource type="Script" uid="uid://eqaocw7qdya2" path="res://Scripts/Controllers/CameraController.gd" id="2_gntrk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dewec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ixxa"]
+size = Vector3(1, 2, 0.5)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_kyqiw")
+metadata/Paused = false
+metadata/Gravity = 9.806
+metadata/WalkSpeed = 3.142
+metadata/JumpForce = 3.142
+metadata/Sliding = false
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+script = ExtResource("2_gntrk")
+metadata/Sensitivity = 3.142
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_dewec")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5ixxa")
+
+[node name="Canvas" type="CanvasLayer" parent="."]

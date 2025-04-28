@@ -17,8 +17,8 @@ signal enemy_died
 
 func _ready():
 	target = get_tree().get_first_node_in_group("player") 
-	if target:
-		print("Player found") 
+	#if target:
+		#print("Player found") 
 
 func _physics_process(delta):
 	if target:
