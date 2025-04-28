@@ -29,7 +29,8 @@ func _physics_process(delta):
 	if target:
 		move_and_attack(delta) # No need to pass target again, class-level is updated
 	else:
-		print("Player not found!")
+		pass
+		#print("Player not found!")
 
 func move_and_attack(delta):
 	if target:
