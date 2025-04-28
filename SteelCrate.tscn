@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cac6b4w8plnxf"]
-
-[ext_resource type="PackedScene" uid="uid://bqnl3ir1hm4bx" path="res://Assets/Objects/SteelCrate.glb" id="1_gcl1f"]
-
-[node name="SteelCrate" instance=ExtResource("1_gcl1f")]

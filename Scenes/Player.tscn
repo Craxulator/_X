@@ -9,6 +9,7 @@
 size = Vector3(1, 2, 0.5)
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+safe_margin = 0.031
 script = ExtResource("1_kyqiw")
 metadata/Paused = false
 metadata/Gravity = 9.806
@@ -27,5 +28,6 @@ mesh = SubResource("BoxMesh_dewec")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_5ixxa")
+debug_fill = false
 
 [node name="Canvas" type="CanvasLayer" parent="."]
