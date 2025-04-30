@@ -1,0 +1,79 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8pxhbfbs1rae"]
+
+[ext_resource type="Shader" uid="uid://y04sclp566j2" path="res://TestShader.gdshader" id="1_uu6xs"]
+[ext_resource type="Shader" uid="uid://b1yqdotx65jvu" path="res://SkyShader.gdshader" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://iovyy51jlqvl" path="res://Scenes/sams.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://dnibpxmbjl5a8" path="res://Scenes/Player.tscn" id="4_fos0i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0du0"]
+render_priority = 0
+shader = ExtResource("1_uu6xs")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_glv2v"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uu6xs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cm0pq"]
+shader = ExtResource("3_r0du0")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
+shader_parameter/star_hue_offset = 0.7
+shader_parameter/star_intensity = 0.05
+shader_parameter/star_twinkle_speed = 0.5
+shader_parameter/star_twinkle_intensity = 0.25
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_fos0i"]
+sky_material = SubResource("ShaderMaterial_cm0pq")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_3dxm6"]
+background_mode = 2
+sky = SubResource("Sky_fos0i")
+
+[sub_resource type="BoxMesh" id="BoxMesh_cm0pq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fos0i"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
+mesh = SubResource("BoxMesh_glv2v")
+surface_material_override/0 = SubResource("ShaderMaterial_r0du0")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_glv2v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_uu6xs")
+skeleton = NodePath("")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 10, 10, -10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3dxm6")
+
+[node name="sams" parent="." instance=ExtResource("4_cm0pq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60031, 1.03315, -2.4956)
+move_speed = 1
+
+[node name="Player" parent="." instance=ExtResource("4_fos0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 2.5, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_cm0pq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_fos0i")

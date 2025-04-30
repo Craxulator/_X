@@ -8,6 +8,8 @@ var StepSliding = false
 var SlideStartVelocity = Vector3.ZERO
 
 var SlideJump = false
+var WallState = false
+var WallTime = 0
 
 func _ready():
 	Hitbox = $Hitbox
@@ -17,14 +19,21 @@ func HandleGravity(DeltaTime):
 	if not is_on_floor(): velocity.y -= get_meta("Gravity") * DeltaTime
 	pass
 	
+func Jump():
+	PreJumpVelocity = velocity
+	velocity.y = get_meta("JumpForce")
+	pass
+
 func HandleJump():
 	if not Input.is_action_just_pressed("Jump"): return
+	if get_meta("CanFly"): Jump(); return
+	
 	if StepSliding:
 		print("Is-On-Floor: " + str(is_on_floor()))
 		return
-	PreJumpVelocity = velocity
-	velocity.y = get_meta("JumpForce")
-	
+		
+	if not is_on_floor(): pass
+	else: Jump()
 	pass
 	
 func HandleMovement(DeltaTime):
@@ -82,6 +91,16 @@ func EndSlide():
 	
 	if not SlideJump:
 		position.y += Hitbox.shape.size.y / 2.4
+		
+func ChangeWallState(IsOnWall):
+	WallState = IsOnWall
+	if is_on_floor(): return
+	print(IsOnWall)
+	pass
+		
+func HandleWallSlide(DeltaTime):
+	
+	pass
 
 func _physics_process(DeltaTime):
 	if get_meta("Paused"): return
@@ -101,8 +120,13 @@ func _physics_process(DeltaTime):
 	if is_on_floor(): 
 		if StepSliding && not get_meta("Sliding"): EndSlide()
 		if get_meta("Sliding"): HandleSlide(DeltaTime)
-		else: HandleMovement(DeltaTime)
-	else: if not get_meta("Sliding"): HandleAirMovement()
+		elif not WallState: HandleMovement(DeltaTime)
+	else: 
+		if not get_meta("Sliding"): HandleAirMovement()
+		
+	if is_on_wall() and not WallState: ChangeWallState(true)
+	elif WallState: ChangeWallState(false)	
+	if WallState and not is_on_floor(): HandleWallSlide(DeltaTime)
 	
 	move_and_slide()
 	pass
