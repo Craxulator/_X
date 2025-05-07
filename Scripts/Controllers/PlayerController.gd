@@ -10,6 +10,7 @@ var SlideStartVelocity = Vector3.ZERO
 var SlideJump = false
 var WallState = false
 var CanWallJump = false
+var WallJumps = 0
 
 func _ready():
 	Hitbox = $Hitbox
@@ -32,6 +33,7 @@ func SuperJump():
 
 func WallJump():
 	Jump()
+	WallJumps += 1
 	CanWallJump = false
 	pass
 
@@ -45,7 +47,7 @@ func HandleJump():
 		return
 		
 	if not is_on_floor():
-		if WallState: WallJump()
+		if WallState and WallJumps < 3: WallJump()
 	else: Jump()
 	pass
 	
@@ -131,7 +133,9 @@ func _physics_process(DeltaTime):
 		if is_on_floor(): EndSlide()
 	
 	if is_on_floor(): 
+		WallJumps = 0
 		if StepSliding && not get_meta("Sliding"): EndSlide()
+		elif Hitbox.shape.size.y < Hitbox.shape.size.z: EndSlide()
 		if get_meta("Sliding"): HandleSlide(DeltaTime)
 		elif not WallState: HandleMovement(DeltaTime)
 	else: 
